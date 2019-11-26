@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kim's Book store</title>
+    <style>
+        /* background attribute make it cover the full screen */
+        body{
+            background-image:url('https://ilovepencil.com/wp-content/uploads/2016/04/2016_04_26_yes24-7-1030x686.jpg');
+            background-size:cover;
+            background-repeat:no-repeat;
+        }
+        /* message of the main page */
+        .intro{
+            margin:10%;
+            margin-right:60%;
+            background-color:rgb(194, 192, 192,0.5 );
+        }
+        .intro h1{
+            font-size:60px;
+            color:white;
+        }
+        /* log in function */
+        .sign_in{
+            position: absolute;
+            right:10px;
+            top:10px;
+            background-color:rgb(194, 192, 192,0.5);
+            margin-right:0%;
+        }
+        /* custumized button */
+        .button{
+            block-size: 30px;
+            inline-size: 100%;
+            text-align:center;
+            background-color:antiquewhite;
+        }
+        
+    </style>
+    <script>
+        // function of log in
+        function Check_log_in(){
+            var id="root";
+            var pw=1234;
+            var submit_id=document.getElementById("ID_").value;
+            var submit_password=document.getElementById("PW_").value;
+            //if id is right pass next step
+            if(id==submit_id){//if password also right then go to home.html
+                if(pw==submit_password){
+                    alert("Log in Success");
+                    location.href="home.html";
+                }//if wrong show message
+                else{
+                    alert("Wrong Password");
+                }
+            }
+            else{
+                alert("Wrong Id");
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- login form  I made it by table-->
+    <div class="sign_in">
+        <form name="log_in">
+            <table>
+                <tr>
+                    <td>ID(root)</td>                   
+                </tr>
+
+                <tr>
+                    <td><input type="text" id="ID_" /></td>
+                </tr>   
+
+                <tr>
+                    <td>Password(1234)</td>  
+                </tr>
+                
+                <tr>
+                    <td><input type="password" id="PW_"/></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2"><input type="button" value="Sign In" class="button" onclick="Check_log_in()"/>  </td>
+                </tr>
+            </table>
+                        
+        </form>
+    </div>
+    <!-- intro message -->
+    <div class="intro">
+        <h1>Kim's</h1>
+        <h1>Book store</h1>
+    </div>
+
+</body>
+</html>
