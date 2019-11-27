@@ -25,7 +25,7 @@ SECRET_KEY = '6qp6@#k3(w!ccy*9md4@ripvo)0^+gfkl80ksd9@#7wja6(%3q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [*]
 
 
 # Application definition
@@ -74,10 +74,15 @@ WSGI_APPLICATION = 'bookstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bookstore', # DB명
+        'USER': 'root', # 데이터베이스 계정
+        'PASSWORD': '!ntbt0927', # 계정 비밀번호
+        'HOST': '172.31.18.83', # 데이테베이스 주소(IP)
+        'PORT': '3306', # 데이터베이스 포트(보통은 3306)
     }
 }
 
