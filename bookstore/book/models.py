@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 # Create your models here.
+
 class Book(models.Model):
     book_num=models.IntegerField(primary_key=True)
     author=models.CharField(max_length=200)
@@ -23,7 +24,7 @@ class Coupon(models.Model):
     name= models.CharField(max_length=200)
 
 class Supplier(models.Model):
-    supplier_num=models.IntegerField(primary_key=True)
+    supplier_num=models.IntegerField(primary_key =True)
     name=models.CharField(max_length=200)
     phone_number=models.IntegerField()
 
