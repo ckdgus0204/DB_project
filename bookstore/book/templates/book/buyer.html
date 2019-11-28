@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Buyers</h3>
+    <h4>id | name | phone_number | address | password</h4>
+    {% for buyer in buyers %}
+        <div>
+            <p>{{buyer}}</p>
+            <p>{{buyer.c_id}}</p>
+            <p>{{buyer.name}}</p>
+            <p>{{buyer.phone_number}}</p>
+            <p>{{buyer.address}}</p>
+            <p>{{buyer.password}}</p>
+            
+        </div>
+    {% endfor %}
+    <h4>add(sign in)</h4>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as}}
+    </form>
+</body>
+</html>

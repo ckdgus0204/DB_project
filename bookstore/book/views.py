@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book, Customer, Coupon, Search, Buy, Accumulate, Supplier, Supply
+from .models import Book, Coupon, Search, Buy, Accumulate, Supplier, Supply,Buyer
 from django.db import connection
 
 # Create your views here.
@@ -7,15 +7,14 @@ from django.db import connection
 def home(request):
     return render(request,'book/home.html')
 
-def book(request):
+def select_all_book(request):
     with connection.cursor() as cursor:
         cursor.execute("SELECT * from book_book")
         rows= cursor.fetchall()
-    return render(request,'book/customer.html')
+    return render(request,'book/book.html',{"books": rows})
 
-def select_user(self):
+def select_all_buyer(request):
     with connection.cursor() as cursor:
-        cursor.execute("SELECT * from Customer",[self.customer])
-        row= cursor.fetchone()
-
-    return row
+        cursor.execute("SELECT * from book_buyer")
+        rows= cursor.fetchall()
+    return render(request,'book/buyer.html',{"buyers": rows})

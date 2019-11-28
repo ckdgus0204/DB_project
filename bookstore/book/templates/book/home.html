@@ -63,15 +63,41 @@
     </script>
 </head>
 <body>
-    <!-- login form  I made it by table-->
-    <div class="sign_in">
-        <a href="{% url 'customer'%}">Get In</a>    
-    </div>
+
+
     <!-- intro message -->
     <div class="intro">
         <h1>Kim's</h1>
         <h1>Book store</h1>
     </div>
-
+    <div class="sign_in">
+            <form name="log_in">
+                <table>
+                    <tr>
+                        <td>ID(root)</td>                   
+                    </tr>
+    
+                    <tr>
+                        <td><input type="text" id="ID_" /></td>
+                    </tr>   
+    
+                    <tr>
+                        <td>Password(1234)</td>  
+                    </tr>
+                    
+                    <tr>
+                        <td><input type="password" id="PW_"/></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2"><input type="button" value="Sign In" class="button" onclick="Check_log_in()"/>  </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="button" value="Log In" class="button" onclick="Check_log_in()"/>  </td>
+                    </tr>
+                </table>
+                            
+            </form>
+        </div>
 </body>
 </html>
