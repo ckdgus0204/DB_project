@@ -8,7 +8,7 @@ login_id=''
 login=False
 while True:
     print("서점 DB")
-    print("1. 로그인 2. 회원가입 3. 회원 전체 출력 4. 회원 검색 5. 회원 탈퇴 6. 회원 정보 변경 7. 책 찾기 8. 책 추가 9. 책 정보 변경 10. 책 삭제 11. ")
+    print("1. 로그인 2. 회원가입 3. 회원 전체 출력 4. 회원 검색 5. 회원 탈퇴 6. 회원 정보 변경 7. 책 찾기 8. 책 추가 9. 책 사기 10. 쿠폰 등록 11. 공급업체 등록 12. 공급 13. 회원 쿠폰등록")
     
     a=int(input())
     # SQL문 실행
@@ -117,6 +117,7 @@ while True:
                 print(row)
         conn.commit()
         conn.close()
+
     elif a==5:
         conn = pymysql.connect(host='192.168.119.3',port=4567, user='root', password='data1234',db='bookstore', charset='utf8')
         if login==False:
@@ -133,8 +134,28 @@ while True:
         conn.close()
 
     elif a==6:
-        sql = "select * from Customer"
-        curs.execute(sql)    
+        conn = pymysql.connect(host='192.168.119.3',port=4567, user='root', password='data1234',db='bookstore', charset='utf8')
+        if login==False:
+            print('로그인 먼저 하고 오 십시오')
+        
+        else:
+            curs = conn.cursor()
+            print('ID:')
+            c_id=input()
+            print('name:')
+            name=input()
+            print('phone_number:')
+            phone_number=int(input())
+            print('address:')
+            address=input()
+            print('password:')
+            password=input()
+
+            sql ='update Customer set id=%s,name=%s ,phone_number=%s, address=%s,password=%s where id=%s'
+            curs.execute(sql,(c_id,name,phone_number,address,password,login_id))
+            login_id=c_id
+            conn.commit()
+            conn.close()  
 
     elif a==7:
         conn = pymysql.connect(host='192.168.119.3',port=4567, user='root', password='data1234',db='bookstore', charset='utf8')
@@ -201,7 +222,7 @@ while True:
                 sql ='INSERT into Search values(%s,%s,%s)'
                 curs.execute(sql,(rows[0],login_id,price))
                 conn.commit()
-        elif b==5:
+        elif b==6:
             print('publisher:')
             publisher=input()
             sql ='select * from Book where publisher=%s'
@@ -238,13 +259,99 @@ while True:
         
         conn.close()
 
+    elif a==9:
+        conn = pymysql.connect(host='192.168.119.3',port=4567, user='root', password='data1234',db='bookstore', charset='utf8')
+        curs = conn.cursor()
 
+        print('book_num:')
+        book_num=int(input())
 
+        sql ='select * from book where book_num=%s'
+        curs.execute(sql,(book_num))
+        rs=curs.fetchall()
 
-    # 데이타 Fetch
+        sql='insert into buy values(%s,%s,%s)'
+        curs.execute(sql,(book_num,login_id,rs[5]))
 
-        # 전체 rows
-    # print(rows[0])  # 첫번째 row: (1, '김정수', 1, '서울')
-    # print(rows[1])  # 두번째 row: (2, '강수정', 2, '서울')
-    
-    # Connection 닫기
+        conn.commit()
+        conn.close()
+
+    elif a==10:
+        conn = pymysql.connect(host='192.168.119.3',port=4567, user='root', password='data1234',db='bookstore', charset='utf8')
+
+        curs = conn.cursor()
+        print('coupon_id:')
+        coupon_id=input()
+        print('discount_percent:')
+        discount_percent=int(input())
+        print('stock:')
+        stock=int(input())
+        print('name:')
+        name=input()
+        
+
+        sql ='insert into Coupon values(%s,%s,%s,%s)'
+        curs.execute(sql,(coupon_id,discount_percent,stock,name))
+        conn.commit()
+        conn.close()
+    elif a==11:
+        conn = pymysql.connect(host='192.168.119.3',port=4567, user='root', password='data1234',db='bookstore', charset='utf8')
+
+        curs = conn.cursor()
+        print('supplier_num:')
+        supplier_num=int(input())
+        print('name:')
+        name=input()
+        print('phone_number:')
+        stock=int(input())
+
+        sql ='insert into Supplier values(%s,%s,%s)'
+        curs.execute(sql,(supplier_num,name,phone_number))
+        conn.commit()
+        conn.close()
+
+    elif a==12:
+        conn = pymysql.connect(host='192.168.119.3',port=4567, user='root', password='data1234',db='bookstore', charset='utf8')
+
+        curs = conn.cursor()
+              
+        sql ='select * from Book '
+        curs.execute(sql)
+        rows=curs.fetchall()
+        print('Books')
+        for row in rows:
+            print(row)
+
+        sql ='select * from Supplier '
+        curs.execute(sql)
+        rows=curs.fetchall()
+        print('Supplier')
+        for row in rows:
+            print(row)
+
+        print('book_num:')
+        book_num=int(input())
+        print('supply_date:')
+        supply_date=int(input())
+        print('supplier_num:')
+        supplier_num=int(input())
+
+        sql ='insert into Supply values(%s,%s,%s)'
+        curs.execute(sql,(book_num,supplier_num,supply_date))
+        conn.commit()
+        conn.close()
+    elif a==13:
+        conn = pymysql.connect(host='192.168.119.3',port=4567, user='root', password='data1234',db='bookstore', charset='utf8')
+
+        curs = conn.cursor()
+        print('coupon_id:')
+        coupon_id=input()
+
+        print('accumulate_date')
+        accumulate_date=int(input())        
+
+        sql ='insert into Accumulate values(%s,%s,%s)'
+        curs.execute(sql,(coupon_id,login_id,accumulate_date))
+        conn.commit()
+        conn.close()
+
