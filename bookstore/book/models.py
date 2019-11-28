@@ -10,7 +10,7 @@ class Book(models.Model):
     stock= models.IntegerField()
     price=models.IntegerField()
 
-class Custumer(models.Model):
+class Customer(models.Model):
     c_id=models.CharField(max_length=200,primary_key=True)
     name=models.CharField(max_length=200)
     phone_number=models.IntegerField()
@@ -30,17 +30,17 @@ class Supplier(models.Model):
 
 class Search(models.Model):
     book_num=models.ForeignKey(Book,on_delete=models.CASCADE)
-    c_id=models.ForeignKey(Custumer,on_delete=models.CASCADE)
+    c_id=models.ForeignKey(Customer,on_delete=models.CASCADE)
     search_word=models.CharField(max_length=200)
 
 class Buy(models.Model):
     book_num=models.ForeignKey(Book,on_delete=models.CASCADE)
-    c_id=models.ForeignKey(Custumer,on_delete=models.CASCADE)
+    c_id=models.ForeignKey(Customer,on_delete=models.CASCADE)
     total_price=models.IntegerField()
 
 class Accumulate(models.Model):
     coupon_id=models.ForeignKey(Coupon,on_delete=models.CASCADE)
-    c_id=models.ForeignKey(Custumer,on_delete=models.CASCADE)
+    c_id=models.ForeignKey(Customer,on_delete=models.CASCADE)
     accumulate_date=models.DateField()
 
 class Supply(models.Model):
