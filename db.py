@@ -171,9 +171,6 @@ while True:
             rows=curs.fetchall()
             for row in rows:
                 print(row)
-                sql ='INSERT into Search values(%s,%s,%s)'
-                curs.execute(sql,(rows[0],login_id,book_num))
-                conn.commit()
 
         elif b==2:
             print('author:')
@@ -183,21 +180,15 @@ while True:
             rows=curs.fetchall()
             for row in rows:
                 print(row)
-                sql ='INSERT into Search values(%s,%s,%s)'
-                curs.execute(sql,(rows[0],login_id,author))
-                conn.commit()
         
         elif b==3:
             print('book_name:')
-            book_name=int(input())
+            book_name=input()
             sql ='select * from Book where book_name=%s'
             curs.execute(sql,(book_name))
             rows=curs.fetchall()
             for row in rows:
                 print(row)
-                sql ='INSERT into Search values(%s,%s,%s)'
-                curs.execute(sql,(rows[0],login_id,book_name))
-                conn.commit()
 
         elif b==4:
             print('stock:')
@@ -205,11 +196,7 @@ while True:
             sql ='select * from Book where stock=%s'
             curs.execute(sql,(stock))
             rows=curs.fetchall()
-            for row in rows:
-                print(row)
-                sql ='INSERT into Search values(%s,%s,%s)'
-                curs.execute(sql,(rows[0],login_id,stock))
-                conn.commit()
+
 
         elif b==5:
             print('price:')
@@ -219,9 +206,7 @@ while True:
             rows=curs.fetchall()
             for row in rows:
                 print(row)
-                sql ='INSERT into Search values(%s,%s,%s)'
-                curs.execute(sql,(rows[0],login_id,price))
-                conn.commit()
+
         elif b==6:
             print('publisher:')
             publisher=input()
@@ -230,9 +215,6 @@ while True:
             rows=curs.fetchall()
             for row in rows:
                 print(row)
-                sql ='INSERT into Search values(%s,%s,%s)'
-                curs.execute(sql,(rows[0],login_id,publisher))
-                conn.commit()
         conn.close()
 
     elif a==8:
@@ -252,7 +234,7 @@ while True:
         print('price:')
         price=input()
 
-        sql ='insert into Customer values(%s,%s,%s,%s,%s,%s)'
+        sql ='insert into Book values(%s,%s,%s,%s,%s,%s)'
         curs.execute(sql,(book_num,author,book_name,publisher,stock,price))
         conn.commit()
 
@@ -266,12 +248,12 @@ while True:
         print('book_num:')
         book_num=int(input())
 
-        sql ='select * from book where book_num=%s'
+        sql ='select * from Book where book_num=%s'
         curs.execute(sql,(book_num))
         rs=curs.fetchall()
-
-        sql='insert into buy values(%s,%s,%s)'
-        curs.execute(sql,(book_num,login_id,rs[5]))
+  
+        sql='insert into Buy values(%s,%s,%s)'
+        curs.execute(sql,(book_num,login_id,rs[0][5]))
 
         conn.commit()
         conn.close()
@@ -303,7 +285,7 @@ while True:
         print('name:')
         name=input()
         print('phone_number:')
-        stock=int(input())
+        phone_number=int(input())
 
         sql ='insert into Supplier values(%s,%s,%s)'
         curs.execute(sql,(supplier_num,name,phone_number))
